@@ -1,19 +1,11 @@
-// var express = require('express');
-// var router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
+const controlador = require('../controllers/usuariosController')
+router.get('/crear', controlador.crear_usuario_get)
 
-// REQUIRE CONTROLLER
-const UsuariosController = require('../controllers/usuariosController');
+router.post('/crear', controlador.crear_usuario_post)
 
-module.exports = (app) => {
-    app.get('/', UsuariosController.getArticles);
-    app.post('/new', UsuariosController.createArticle);
-    app.put('/update/article/:id', UsuariosController.updateArticle);
-    app.delete('/delete/article/:id', UsuariosController.deleteArticle);
-}
+router.get('/:id', controlador.perfil_usuario)
 
 module.exports = router;

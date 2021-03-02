@@ -1,16 +1,31 @@
-const consultar = require('./db.js')
-console.log(consultar)
+const cliente = require('../db/connection')
 
-const crearTabla = (() => {
-  const consulta = `
-    CREATE TABLE IF NOT EXISTS usuarios (
-      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-      dni CHAR(9),
-      email VARCHAR(30),
-      nombre VARCHAR(20),
-      apellidos VARCHAR(20),
-      edad SMALLINT
-    )
-  `
-  consultar(consulta, 'Tabla creada con éxito')
-})()
+exports.crear = data => {
+  const { dni, email, nombre, apellidos, edad } = data
+  const consulta = {
+    text: `INSERT INTO usuarios (dni, email, nombre, apellidos, edad) 
+            VALUES ($1, $2, $3, $4, $5) 
+            RETURNING *`,
+    values: [dni, email, nombre, apellidos, edad]
+  }
+  
+  cliente
+    .query(consulta)
+    .then(res => console.log('Usuario creado con éxito'))
+    .catch(err => console.error(err.stack))
+}
+
+exports.encontrarUno = data => {
+  const { campo, valor } = data
+  const consulta = {
+    text: `SELECT * FROM usuarios WHERE ${campo} = $1`,
+    values: [valor],
+  }
+  return cliente
+    .query(consulta)
+    .then(res => {
+      console.log(`Se han encontrado un usuario con ${campo} igual a ${valor}`)
+      if (res.rows.length > 0) return true
+    })
+    .catch(err => console.log(err.stack))
+}

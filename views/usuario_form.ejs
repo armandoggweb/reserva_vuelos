@@ -1,0 +1,24 @@
+<%= title %> 
+<form method="POST" action="/usuario/crear">
+  <label for="nombre">Nombre: </label><br>
+  <input type="text" id="nombre" name="nombre" value=<%= usuario ? usuario.nombre : "" %>><br>
+  <label for="nombre">Apellidos: </label><br>
+  <input type="text" id="apellidos" name="apellidos" value=<%= usuario ? usuario.apellidos : "" %>><br>
+  <label for="nombre">DNI: </label><br>
+  <input type="text" id="dni" name="dni" value=<%= usuario ? usuario.dni : "" %>><br>
+  <label for="email">Email: </label><br>
+  <input type="email" id="email" name="email" value=<%= usuario ? usuario.email : "" %>><br>
+  <label for="nombre">Edad: </label><br>
+  <input type="text" id="edad" name="edad" value=<%= usuario ? usuario.edad : "" %>><br>
+  <input type="submit" value="Enviar">
+</form>
+
+<% if(errors) {%>
+  <ul class="errors">
+    <% errors.forEach( err => {%>
+      <li>
+        <%= err.msg %>
+      </li>
+    <% }) %> 
+  </ul>
+<% } %> 
