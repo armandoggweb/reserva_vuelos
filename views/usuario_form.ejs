@@ -1,5 +1,5 @@
 <%= title %> 
-<form method="POST" action="/usuario/crear">
+<form method="POST" action=<%= action %> >
   <label for="nombre">Nombre: </label><br>
   <input type="text" id="nombre" name="nombre" value=<%= usuario ? usuario.nombre : "" %>><br>
   <label for="nombre">Apellidos: </label><br>

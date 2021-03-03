@@ -6,6 +6,10 @@ router.get('/crear', controlador.crear_usuario_get)
 
 router.post('/crear', controlador.crear_usuario_post)
 
+router.get('/editar/:id', controlador.editar_usuario_get)
+
+router.post('/editar/:id', controlador.editar_usuario_post)
+
 router.get('/:id', controlador.perfil_usuario)
 
 module.exports = router;
