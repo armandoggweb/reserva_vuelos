@@ -171,9 +171,17 @@ exports.editar_usuario_post = [
 
 
 exports.perfil_usuario = function (req, res, next) {
-  res.render('perfil_usuario', {
-    title: 'Usuario',
-    usuario: undefined,
-    errors: null
-  })
+  Usuario.encontrarUno({ campo: 'id', valor: req.params.id })
+    .then(resultado => {
+      if (resultado) {
+        res.render('perfil_usuario', {
+          title: 'Usuario',
+          usuario: resultado,
+          errors: null
+        })
+        return
+      }
+      res.redirect('/')
+    })
+
 }
