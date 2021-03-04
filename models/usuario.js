@@ -30,7 +30,7 @@ exports.actualizar = data => {
   cliente
     .query(consulta)
     .then(res => {
-      if(!res.rowCount > 0){
+      if (!res.rowCount > 0) {
         console.log('No se ha podido modificar el usuario')
       } else {
         console.log('Usuario modificado con éxito')
@@ -39,6 +39,22 @@ exports.actualizar = data => {
     .catch(err => console.error(err.stack))
 }
 
+exports.eliminar = id => {
+  const consulta = {
+    text: 'DELETE FROM usuarios WHERE id = $1',
+    values: [id],
+  }
+  return cliente
+    .query(consulta)
+    .then(res => {
+      if (!res.rowCount > 0) {
+        console.log('No se ha podido eliminar el usuario')
+      } else {
+        console.log('Usuario eliminado con éxito')
+      }
+    })
+    .catch(err => console.log(err.stack))
+}
 
 exports.encontrarUno = data => {
   const { campo, valor } = data

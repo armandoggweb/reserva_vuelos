@@ -1,12 +1,11 @@
 const Usuario = require('../models/usuario')
-const {
-  body,
-  validationResult
-} = require("express-validator");
+const { validationResult } = require("express-validator")
+const { validacionUsuario } = require('./helper');
+
 
 //Formulario para crear usuario
 exports.crear_usuario_get = function (req, res, next) {
-  res.render('usuario_form', {
+  res.render('usuario/form', {
     title: 'Crear usuario',
     usuario: undefined,
     action: '/usuario/crear',
@@ -17,43 +16,12 @@ exports.crear_usuario_get = function (req, res, next) {
 //Envío de formulario para crear usuario
 exports.crear_usuario_post = [
   //Sanitazación y validación de datos
-  body('nombre').trim()
-    .isLength({ min: 2 }).escape().withMessage('Debe introducir un nombre')
-    .isAlphanumeric('es-ES').withMessage('Nombre debe contener solamente carácteres alfanuméricos'),
-  body('apellidos').trim()
-    .isLength({ min: 2 }).escape().withMessage('Debe introducir un nombre')
-    .isAlphanumeric('es-ES').withMessage('Apellidos debe contener solamente carácteres alfanuméricos'),
-  body('email')
-    .isEmail().withMessage('Email no válido')
-    .normalizeEmail()
-    .custom(valor => {
-      return Usuario.encontrarUno({
-        campo: 'email',
-        valor: valor
-      }).then(email => {
-        if (email) return Promise.reject('Email existente');
-      })
-    }),
-  body('dni')
-    .trim()
-    .isLength({ min: 9, max: 9 }).withMessage('Dni no válido')
-    .toUpperCase()
-    .escape()
-    .custom(valor => {
-      return Usuario.encontrarUno({
-        campo: 'dni',
-        valor: valor
-      }).then(dni => {
-        if (dni) return Promise.reject('Dni existente');
-      })
-    }),
-
-  body('edad').isInt({ min: 18 }).withMessage('Debe ser mayor de edad'),
+  validacionUsuario(),
 
   function (req, res, err) {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      res.render('usuario_form', {
+      res.render('usuario/form', {
         title: 'Crear usuario',
         usuario: req.body,
         action: '/usuario/crear',
@@ -85,7 +53,7 @@ exports.editar_usuario_get = function (req, res, next) {
   })
     .then(result => {
       if (result) {
-        res.render('usuario_form', {
+        res.render('usuario/form', {
           title: 'Editar usuario',
           usuario: result,
           action: '/usuario/editar/1',
@@ -103,49 +71,14 @@ exports.editar_usuario_get = function (req, res, next) {
 //Actualizar datos de usuario existente
 exports.editar_usuario_post = [
   //Validación de datos
-  body('nombre')
-    .trim()
-    .isLength({ min: 2 }).escape().withMessage('Debe introducir un nombre')
-    .isAlphanumeric('es-ES').withMessage('Nombre debe contener solamente carácteres alfanuméricos'),
-  body('apellidos').trim()
-    .isLength({ min: 2 }).escape().withMessage('Debe introducir un nombre')
-    .isAlphanumeric('es-ES').withMessage('Apellidos debe contener solamente carácteres alfanuméricos'),
-  body('email')
-    .isEmail().withMessage('Email no válido')
-    .normalizeEmail()
-    .custom((valor, { req }) => {
-      return Usuario.encontrarUno({ campo: 'email', valor: valor })
-        .then(res => {
-          if (res) {
-            if (!(res.id == req.params.id)) {
-              return Promise.reject('Email existente')
-            }
-          }
-        })
-    }),
-  body('dni')
-    .trim()
-    .toUpperCase()
-    .isLength({ min: 9, max: 9 }).withMessage('Dni no válido')
-    .escape()
-    .custom((valor, { req }) => {
-      return Usuario.encontrarUno({ campo: 'dni', valor: valor })
-        .then(res => {
-          if (res) {
-            if (!(res.id == req.params.id)) {
-              return Promise.reject('Dni existente')
-            }
-          }
-        })
-    }),
-
-  body('edad').isInt({ min: 18 }).withMessage('Debe ser mayor de edad'),
+  validacionUsuario()
+  ,
 
   function (req, res, err) {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-      res.render('usuario_form', {
+      res.render('usuario/form', {
         title: 'Editar usuario',
         usuario: req.body,
         action: '/usuario/editar/' + req.params.id,
@@ -169,12 +102,18 @@ exports.editar_usuario_post = [
   }
 ]
 
+//Borra el usuario
 
+exports.eliminar = function (req, res, next) {
+
+}
+
+//Muestra el perfil del usuario
 exports.perfil_usuario = function (req, res, next) {
   Usuario.encontrarUno({ campo: 'id', valor: req.params.id })
     .then(resultado => {
       if (resultado) {
-        res.render('perfil_usuario', {
+        res.render('usuario/perfil', {
           title: 'Usuario',
           usuario: resultado,
           errors: null

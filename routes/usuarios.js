@@ -10,6 +10,8 @@ router.get('/editar/:id', controlador.editar_usuario_get)
 
 router.post('/editar/:id', controlador.editar_usuario_post)
 
+router.post('/editar/:id', controlador.editar_usuario_post)
+
 router.get('/:id', controlador.perfil_usuario)
 
 module.exports = router;
