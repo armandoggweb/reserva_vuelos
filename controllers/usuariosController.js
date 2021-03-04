@@ -4,7 +4,7 @@ const { validacionUsuario } = require('./helper');
 
 
 //Formulario para crear usuario
-exports.crear_usuario_get = function (req, res, next) {
+exports.crear_get = function (req, res, next) {
   res.render('usuario/form', {
     title: 'Crear usuario',
     usuario: undefined,
@@ -14,7 +14,7 @@ exports.crear_usuario_get = function (req, res, next) {
 };
 
 //Envío de formulario para crear usuario
-exports.crear_usuario_post = [
+exports.crear_post = [
   //Sanitazación y validación de datos
   validacionUsuario(),
 
@@ -46,7 +46,7 @@ exports.crear_usuario_post = [
 ]
 
 //Formulario paraeditar usuario
-exports.editar_usuario_get = function (req, res, next) {
+exports.editar_get = function (req, res, next) {
   Usuario.encontrarUno({
     campo: 'id',
     valor: req.params.id
@@ -56,7 +56,7 @@ exports.editar_usuario_get = function (req, res, next) {
         res.render('usuario/form', {
           title: 'Editar usuario',
           usuario: result,
-          action: '/usuario/editar/1',
+          action: '/usuario/editar/' + req.params.id,
           errors: null
         })
       } else {
@@ -69,7 +69,7 @@ exports.editar_usuario_get = function (req, res, next) {
 }
 
 //Actualizar datos de usuario existente
-exports.editar_usuario_post = [
+exports.editar_post = [
   //Validación de datos
   validacionUsuario()
   ,
@@ -102,14 +102,38 @@ exports.editar_usuario_post = [
   }
 ]
 
+//Muestra confirmación para eliminar usuario
+exports.eliminar_get = function (req, res, next) {
+  Usuario.encontrarUno({
+    campo: 'id',
+    valor: req.params.id
+  })
+    .then(result => {
+      if (result) {
+        res.render('usuario/eliminar', {
+          title: 'Eliminar usuario',
+          usuario: result,
+          action: '/usuario/editar/' + req.params.id,
+          errors: null
+        })
+      } else {
+        res.redirect('/')
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 //Borra el usuario
-
-exports.eliminar = function (req, res, next) {
-
+exports.eliminar_post = function (req, res, next) {
+  Usuario.eliminar(req.params.id)
+    .then(resultado => res.redirect('/'))
+    .catch(err => console.error(err.stack))
 }
 
 //Muestra el perfil del usuario
-exports.perfil_usuario = function (req, res, next) {
+exports.perfil = function (req, res, next) {
   Usuario.encontrarUno({ campo: 'id', valor: req.params.id })
     .then(resultado => {
       if (resultado) {

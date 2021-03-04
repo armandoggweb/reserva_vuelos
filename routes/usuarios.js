@@ -2,16 +2,18 @@ const express = require('express')
 const router = express.Router()
 
 const controlador = require('../controllers/usuariosController')
-router.get('/crear', controlador.crear_usuario_get)
+router.get('/crear', controlador.crear_get)
 
-router.post('/crear', controlador.crear_usuario_post)
+router.post('/crear', controlador.crear_post)
 
-router.get('/editar/:id', controlador.editar_usuario_get)
+router.get('/editar/:id', controlador.editar_get)
 
-router.post('/editar/:id', controlador.editar_usuario_post)
+router.post('/editar/:id', controlador.editar_post)
 
-router.post('/editar/:id', controlador.editar_usuario_post)
+router.get('/eliminar/:id', controlador.eliminar_get)
 
-router.get('/:id', controlador.perfil_usuario)
+router.post('/eliminar/:id', controlador.eliminar_post)
+
+router.get('/:id', controlador.perfil)
 
 module.exports = router;
