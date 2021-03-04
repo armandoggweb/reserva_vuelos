@@ -1,0 +1,190 @@
+﻿{
+  "data": [
+    {
+      "icon": "marker",
+      "category": "Ciudades",
+      "data": [
+        {
+          "_id": "59e28b916599f0742f001126",
+          "iata": "MAD",
+          "label": "Madrid, España",
+          "slug": "madrid-espana"
+        },
+        {
+          "_id": "59e28b2b6599f0742f000264",
+          "iata": "BCN",
+          "label": "Barcelona, España",
+          "slug": "barcelona-espana"
+        },
+        {
+          "_id": "59e28c1b6599f0742f001bcd",
+          "iata": "SVQ",
+          "label": "Sevilla, España",
+          "slug": "sevilla-espana"
+        },
+        {
+          "_id": "59e28b616599f0742f000bf7",
+          "iata": "IBZ",
+          "label": "Ibiza, España",
+          "slug": "ibiza-espana"
+        },
+        {
+          "_id": "59e28b436599f0742f0007a2",
+          "iata": "EAS",
+          "label": "San Sebastián, España",
+          "slug": "san-sebastian-espana"
+        },
+        {
+          "_id": "59e28b556599f0742f000a67",
+          "iata": "GRX",
+          "label": "Granada, España",
+          "slug": "granada-espana"
+        },
+        {
+          "_id": "59e28c106599f0742f001b04",
+          "iata": "SN2",
+          "label": "Sierra Nevada, Andalucía, España",
+          "slug": "sierra-nevada-espana"
+        },
+        {
+          "_id": "59e28c4e6599f0742f001efc",
+          "iata": "VLC",
+          "label": "Valencia, España",
+          "slug": "valencia-espana"
+        },
+        {
+          "_id": "59e28bb86599f0742f0014b3",
+          "iata": "ODB",
+          "label": "Córdoba, España",
+          "slug": "cordoba-1-espana"
+        },
+        {
+          "_id": "59e28bd26599f0742f0016b2",
+          "iata": "PMI",
+          "label": "Palma de Mallorca, España",
+          "slug": "palma-de-mallorca-espana"
+        },
+        {
+          "_id": "59e28b2d6599f0742f0002ed",
+          "iata": "BIO",
+          "label": "Bilbao, España",
+          "slug": "bilbao-espana"
+        },
+        {
+          "_id": "59e28c876599f0742f002260",
+          "iata": "ZAZ",
+          "label": "Zaragoza, España",
+          "slug": "zaragoza-espana"
+        },
+        {
+          "_id": "59e28bff6599f0742f0019f7",
+          "iata": "SCQ",
+          "label": "Santiago de Compostela, España",
+          "slug": "santiago-de-compostela-espana"
+        },
+        {
+          "_id": "59e28c0d6599f0742f001ada",
+          "iata": "SLM",
+          "label": "Salamanca, España",
+          "slug": "salamanca-espana"
+        },
+        {
+          "_id": "59e28b8a6599f0742f001083",
+          "iata": "LPA",
+          "label": "Las Palmas de Gran Canaria, España",
+          "slug": "las-palmas-de-gran-canaria-espana"
+        }
+      ]
+    },
+    {
+      "icon": "marker",
+      "category": "Aeropuertos",
+      "data": [
+        {
+          "_id": "59e50a576599f02815000158",
+          "iata": "BCN",
+          "label": "Aeropuerto El Prat De Llobregat, Barcelona, España",
+          "slug": "aeropuerto-el-prat-de-llobregat, barcelona, espana"
+        },
+        {
+          "_id": "59e50a576599f028150001af",
+          "iata": "BIO",
+          "label": "Aeropuerto Sondica, Bilbao, España",
+          "slug": "aeropuerto-sondica, bilbao, espana"
+        },
+        {
+          "_id": "59e50a5a6599f02815000423",
+          "iata": "EAS",
+          "label": "Aeropuerto Donostia - San Sebastian, San Sebastián, España",
+          "slug": "aeropuerto-donostia-san-sebastian, san-sebastian, espana"
+        },
+        {
+          "_id": "59e50a5c6599f02815000585",
+          "iata": "GRX",
+          "label": "Aeropuerto Granada, Granada, España",
+          "slug": "aeropuerto-granada, granada, espana"
+        },
+        {
+          "_id": "59e50a5e6599f02815000658",
+          "iata": "IBZ",
+          "label": "Aeropuerto Ibiza, Ibiza, España",
+          "slug": "aeropuerto-ibiza, ibiza, espana"
+        },
+        {
+          "_id": "59e50a636599f028150008c4",
+          "iata": "LPA",
+          "label": "Aeropuerto Gran Canaria, Las Palmas de Gran Canaria, España",
+          "slug": "aeropuerto-gran-canaria, las-palmas-de-gran-canaria, espana"
+        },
+        {
+          "_id": "59e50a636599f02815000923",
+          "iata": "MAD",
+          "label": "Aeropuerto Barajas, Madrid, España",
+          "slug": "aeropuerto-barajas, madrid, espana"
+        },
+        {
+          "_id": "59e50a686599f02815000b1a",
+          "iata": "ODB",
+          "label": "Aeropuerto Cordoba, Córdoba, España",
+          "slug": "aeropuerto-cordoba, cordoba-1, espana"
+        },
+        {
+          "_id": "59e50a6b6599f02815000c13",
+          "iata": "PMI",
+          "label": "Aeropuerto Son Sant Joan, Palma de Mallorca, España",
+          "slug": "aeropuerto-son-sant-joan, palma-de-mallorca, espana"
+        },
+        {
+          "_id": "59e50a6f6599f02815000d67",
+          "iata": "SCQ",
+          "label": "Aeropuerto Santiago De Compostela, Santiago de Compostela, España",
+          "slug": "aeropuerto-santiago-de-compostela, santiago-de-compostela, espana"
+        },
+        {
+          "_id": "59e50a716599f02815000de5",
+          "iata": "SLM",
+          "label": "Aeropuerto Matacan, Salamanca, España",
+          "slug": "aeropuerto-matacan, salamanca, espana"
+        },
+        {
+          "_id": "59e50a796599f02815001022",
+          "iata": "VLC",
+          "label": "Aeropuerto Valencia, Valencia, España",
+          "slug": "aeropuerto-valencia, valencia, espana"
+        },
+        {
+          "_id": "59e50a7f6599f028150011cb",
+          "iata": "ZAZ",
+          "label": "Aeropuerto Zaragoza, Zaragoza, España",
+          "slug": "aeropuerto-zaragoza, zaragoza, espana"
+        },
+        {
+          "_id": "59e50abe6599f02815001ff1",
+          "iata": "XOJ",
+          "label": "Central Railway St, Córdoba, España",
+          "slug": "central-railway-st, cordoba-1, espana"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 require('./db/connection')
-require('./db/schema')
+
 // import('./models/usuario.js')
 var createError = require('http-errors');
 var express = require('express');
