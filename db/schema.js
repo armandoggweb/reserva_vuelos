@@ -48,3 +48,17 @@ const crearVuelos = (() => {
     .then(res => console.log('Tabla vuelos creada con éxito'))
     .catch(err => console.error(err.stack))
 })()
+
+const crearReservas = (() => {
+  const consulta = `
+      CREATE TABLE IF NOT EXISTS reservas (
+        id SMALLSERIAL PRIMARY KEY,
+        vuelo_id SMALLINT NOT NULL REFERENCES vuelos,
+        usuario_id SMALLINT NOT NULL REFERENCES usuarios
+      )
+    `
+  cliente
+    .query(consulta)
+    .then(res => console.log('Tabla reservas creada con éxito'))
+    .catch(err => console.error(err.stack))
+})()
