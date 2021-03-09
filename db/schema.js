@@ -37,10 +37,10 @@ const crearVuelos = (() => {
   const consulta = `
       CREATE TABLE IF NOT EXISTS vuelos (
         id SMALLSERIAL PRIMARY KEY,
-        aeropuerto_llegada SMALLINT NOT NULL REFERENCES aeropuertos,
-        aeropuerto_salida SMALLINT NOT NULL REFERENCES aeropuertos,
-        fecha_llegada TIMESTAMP NOT NULL,
-        fecha_salida TIMESTAMP NOT NULL
+        origen SMALLINT NOT NULL REFERENCES aeropuertos,
+        destino SMALLINT NOT NULL REFERENCES aeropuertos,
+        salida TIMESTAMP NOT NULL,
+        llegada TIMESTAMP NOT NULL
       )
     `
   cliente

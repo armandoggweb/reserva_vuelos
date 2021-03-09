@@ -16,6 +16,21 @@ exports.crear = data => {
     .catch(err => console.error(err.stack))
 }
 
+exports.encontrarUno = data => {
+  const { campo, valor } = data
+  const consulta = {
+    text: `SELECT * FROM aeropuertos WHERE ${campo} = $1`,
+    values: [valor],
+  }
+  return cliente
+    .query(consulta)
+    .then(res => {
+      console.log(`Se han encontrado un aeropuerto exitosamente`)
+      if (res.rows.length > 0) return res.rows[0]
+    })
+    .catch(err => console.log(err.stack))
+}
+
 exports.encontrarTodos = () => {
   return cliente
     .query('SELECT * FROM aeropuertos')
