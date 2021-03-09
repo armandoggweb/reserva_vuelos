@@ -1,6 +1,11 @@
 <h3><%= aeropuertos.origen.nombre %> | <%= aeropuertos.destino.nombre %></h3>
 
-<form method="GET">
+<form method="GET" action=<%= action %> >
+  <% if(reserva ){%> 
+    <input type="hidden" name ="reserva" value=<%= reserva %> >
+  <% } %>
+  <input type="hidden" name ="origen" value=<%= aeropuertos.origen.id %> >
+  <input type="hidden" name ="destino" value=<%= aeropuertos.destino.id %> >
   <table>
     <tr>
       <th></th>
@@ -13,19 +18,19 @@
     <% vuelos.forEach(vuelo =>{ %> 
       <tr>
         <td>
-          <input type="radio" id=<%="vuelo" + vuelo.id %> name=vuelo value=<%= vuelo.id %> >
+          <input type="radio" id=<%="vuelo" + vuelo.id %> name="vuelo" value=<%= vuelo.id %> >
         </td>  
         <td>
           <%= vuelo.salida.toLocaleDateString('es-ES') %>
         </td>        
         <td>
-          <%= vuelo.salida.toLocaleTimeString('es-ES') %>
+          <%= vuelo.salida.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
         </td>
         <td>
           <%= vuelo.llegada.toLocaleDateString('es-ES') %>
         </td>        
         <td>
-          <%= vuelo.llegada.toLocaleTimeString('es-ES') %>
+          <%= vuelo.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
         </td>
       </tr>
     <% }) %>
@@ -33,5 +38,5 @@
   </table>
 
   <input type="submit" value= "Enviar">
-  
+
 </form>

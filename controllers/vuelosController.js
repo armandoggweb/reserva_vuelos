@@ -27,7 +27,9 @@ exports.disponibles = function (req, res, next) {
           origen: result[0].filter(aeropuerto => aeropuerto.id == req.query.origen)[0],
           destino: result[0].filter(aeropuerto => aeropuerto.id == req.query.destino)[0]
         }
-        res.render('vuelos/disponibles', { vuelos, aeropuertos })
+        const action = req.query.reserva ? '/reservas/editar/' + req.query.reserva : '/reservas/crear'
+        console.log(action)
+        res.render('vuelos/disponibles', { vuelos, aeropuertos, action, reserva: req.query.reserva})
       }
     })
     .catch(err => console.error(err.stack))

@@ -1,0 +1,21 @@
+<ul>
+  <li>Resumen reserva</li>
+  <li>Origen: </li>
+  <ul>
+      <li> <%= aeropuertos.origen.ciudad %> (<%= aeropuertos.origen.siglas %>)</li>
+      <li>Fecha: <%= vuelo.salida.toLocaleDateString('es-ES') %>  </li>
+      <li>Hora: <%= vuelo.salida.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %></li>
+  </ul>
+  <li>Destino: </li>
+  <ul>
+      <li> <%= aeropuertos.destino.ciudad %> (<%= aeropuertos.destino.siglas %>)</li>
+      <li>Fecha: <%= vuelo.llegada.toLocaleDateString('es-ES') %>  </li>
+      <li>Hora: <%= vuelo.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %></li>
+  </ul>       
+</ul>
+<h3><%= reserva ? '¿Desea modificar su reserva?' : '¿Desea finalizar su reserva? '%> </h3>
+<form method="POST" action=<%= action %> >
+  <input type="hidden" name="vuelo" value=<%= vuelo.id %> >
+  <input type="hidden" name="usuario" <%#= usuario.id %> >
+  <input type="submit" value="Enviar">
+</form>

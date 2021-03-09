@@ -1,3 +1,50 @@
 <h1> <%= usuario.nombre %> </h1>
-<a href=<%='editar/' + usuario.id %> > Editar </a>
-<a href=<%='eliminar/' + usuario.id %> > Eliminar </a>
+<a href=<%='editar/' + usuario.id %> > Editar perfil</a>
+<a href=<%='eliminar/' + usuario.id %> > Eliminar cuenta</a>
+<h3>Reservas</h3>
+<table>
+  <tr>
+    <th>Identificador</th>
+    <th>Fecha de salida</th>
+    <th>Origen</th>
+    <th>Hora de salida</th>
+    <th>Destino</th>
+    <th>Hora de llegada</th>
+    <th></th>
+  </tr>
+
+  <% reservas.forEach(reserva =>{ %> 
+    <tr>
+      <td>
+        <%= reserva.id %>
+      </td> 
+      <td>
+        <%= reserva.salida.toLocaleDateString('es-ES') %>
+      </td>     
+      <td>
+        <%= aeropuertos[reserva.origen].ciudad %> (<%= aeropuertos[reserva.origen].siglas %>)
+      </td>    
+      <td>
+        <%= reserva.salida.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
+      </td>
+      <td>
+        <%= aeropuertos[reserva.destino].ciudad %> (<%= aeropuertos[reserva.destino].siglas %>)
+      </td>        
+      <td>
+        <%= reserva.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
+      </td>
+      <td>
+        <a href=<%= '/vuelos/disponibles/' 
+            + `?origen=${reserva.origen}`
+            + `&destino=${reserva.destino}`
+            + `&vuelo=${reserva.vuelo_id}`
+            + `&reserva=${reserva.id}` %> >
+          Modificar vuelo
+        </a> 
+        <a href=<%= '/reservas/eliminar/' + reserva.id %> >Eliminar</a>
+      </td>
+    </tr>
+  <% }) %>
+
+</table>
+</ul>

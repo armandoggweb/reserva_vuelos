@@ -1,4 +1,7 @@
 const Usuario = require('../models/usuario')
+const Reserva = require('../models/reserva')
+const Aeropuerto = require('../models/aeropuerto')
+
 const { validationResult } = require("express-validator")
 const { validacionUsuario } = require('./helper');
 
@@ -113,7 +116,6 @@ exports.eliminar_get = function (req, res, next) {
         res.render('usuario/eliminar', {
           title: 'Eliminar usuario',
           usuario: result,
-          action: '/usuario/editar/' + req.params.id,
           errors: null
         })
       } else {
@@ -134,12 +136,18 @@ exports.eliminar_post = function (req, res, next) {
 
 //Muestra el perfil del usuario
 exports.perfil = function (req, res, next) {
-  Usuario.encontrarUno({ campo: 'id', valor: req.params.id })
-    .then(resultado => {
-      if (resultado) {
+  Promise.all([
+    Aeropuerto.encontrarTodos(),
+    Usuario.encontrarUno({ campo: 'id', valor: req.params.id }),
+    Reserva.encontrarTodasUsuario(req.params.id)
+  ])
+    .then(result => {
+      if (result.every(r => r)) {
         res.render('usuario/perfil', {
           title: 'Usuario',
-          usuario: resultado,
+          aeropuertos: result[0],
+          usuario: result[1],
+          reservas: result[2],
           errors: null
         })
         return
