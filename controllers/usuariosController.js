@@ -67,7 +67,7 @@ exports.editar_get = function (req, res, next) {
       }
     })
     .catch(err => {
-      console.log(err)
+      console.error(err)
     })
 }
 
@@ -123,7 +123,7 @@ exports.eliminar_get = function (req, res, next) {
       }
     })
     .catch(err => {
-      console.log(err)
+      console.error(err)
     })
 }
 
@@ -144,7 +144,7 @@ exports.perfil = function (req, res, next) {
     .then(result => {
       if (result.every(r => r)) {
         res.render('usuario/perfil', {
-          title: 'Usuario',
+          title: 'Perfil',
           aeropuertos: result[0],
           usuario: result[1],
           reservas: result[2],

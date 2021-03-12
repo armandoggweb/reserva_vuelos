@@ -1,8 +1,236 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
+body {
+  font: 16px Roboto, Helvetica, Arial, sans-serif;
+
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+ul {
+  list-style: none;
+}
+
+/* h3{
+  font-size: 1.5em;
+  margin: 30px;
+} */
+
+nav,
+footer {
+  background-color: #69007f;
+  color: #ffffff;
+}
+
+nav {
+  padding: 0;
+  height: 75px;
+  position: sticky;
+  top: 0;
+  border-bottom: solid 2px #ff9800;
+}
+
+nav img {
+  height: 70px;
+  width: 70px;
+}
+
+nav li {
+  margin: 0 30px;
+  padding: 0;
+}
+
+nav a {
+  display: inline-block;
+  height: 75px;
+  min-width: 100px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 75px;
+  padding: 0px 10px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+nav li:not(:first-child) a:hover {
+  background-color: #cf5ce2;
+  color: #000000;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  font-family: 'Bebas Neue', cursive;
+  font-style: italic;
+  font-weight: 900;
+  background-image: linear-gradient(to bottom right, #cf5ce2, #ffc947);
+  ;
+}
+
+main {
+  background: url('../images/plane-wing.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+main>* {
+  max-width: 1000px;
+  min-height: 700px;
+  padding-top: 30px;
+  margin: 0 auto;
+  background-color: rgba(207, 92, 226, 0.5);
+}
+
+.busqueda {}
+
+.busqueda form {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.busqueda input {
+  align-self: flex-end;
+}
+
+select {
+  font-size: 1em;
+}
+
+.busqueda div {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+
+.perfil {
+  display: flex;
+}
+
+.perfil div:first-child {
+  background-color: blanchedalmond;
+  padding: 10px;
+}
+
+.perfil-acciones {
+  display: flex;
+  flex-direction: column;
+}
+
+.mis-reservas {
+  margin: 50px 20px;
+  padding: 10px;
+  background-color: blanchedalmond;
+}
+
+.disponibles {
+  text-align: center;
+}
+
+.disponibles h3 {
+  margin: 20px 0;
+}
+
+.disponibles form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.disponibles input[type=submit] {
+  margin-top: 20px;
+  align-self: center;
+}
+
+.confirmar-reserva>*,
+.eliminar-usuario>*,
+.eliminar-reserva>* {
+  margin: 10px 0;
+}
+
+.usuario-form input:not(input[type=submit]) {
+  font-size: 1.5em;
+  margin: 10px 0;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.usuario-form label {
+  font-size: 1.5em;
+}
+
+.detalle {
+  margin-left: 40px;
+}
+
+.contacto>* {
+  margin-bottom: 20px;
+}
+
+.contacto form>* {
+  margin-bottom: 10px;
+}
+
+footer {
+  height: fit-content;
+  padding: 10px 0;
+}
+
+footer a {
+  color: #ffffff;
+}
+
+.btn {
+  height: 30px;
+  width: 100px;
+  padding: 5px 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+  color: purple;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: orange;
+  background-color: purple;
+  color: white;
+}
+
+.alinear-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+tr {
+  text-align: center;
+}
+
+th,
+td {
+  padding: 5px 10px;
 }

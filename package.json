@@ -14,8 +14,10 @@
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-ejs-layouts": "^2.5.0",
     "express-validator": "^6.10.0",
     "http-errors": "~1.6.3",
+    "passport": "^0.4.1",
     "pg": "^8.5.1"
   },
   "devDependencies": {

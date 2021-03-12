@@ -1,42 +1,44 @@
-<h3><%= aeropuertos.origen.nombre %> | <%= aeropuertos.destino.nombre %></h3>
+<section class="disponibles">
+  <h3><%= aeropuertos.origen.nombre %> | <%= aeropuertos.destino.nombre %></h3>
 
-<form method="GET" action=<%= action %> >
-  <% if(reserva ){%> 
-    <input type="hidden" name ="reserva" value=<%= reserva %> >
-  <% } %>
-  <input type="hidden" name ="origen" value=<%= aeropuertos.origen.id %> >
-  <input type="hidden" name ="destino" value=<%= aeropuertos.destino.id %> >
-  <table>
-    <tr>
-      <th></th>
-      <th>Fecha de salida</th>
-      <th>Hora de salida</th>
-      <th>Fecha de llegada</th>
-      <th>Hora de llegada</th>
-    </tr>
-  
-    <% vuelos.forEach(vuelo =>{ %> 
+  <form method="GET" action=<%= action %> >
+    <% if( reserva ){%> 
+      <input type="hidden" name ="reserva" value=<%= reserva %> >
+    <% } %>
+    <input type="hidden" name ="origen" value=<%= aeropuertos.origen.id %> >
+    <input type="hidden" name ="destino" value=<%= aeropuertos.destino.id %> >
+    <table>
       <tr>
-        <td>
-          <input type="radio" id=<%="vuelo" + vuelo.id %> name="vuelo" value=<%= vuelo.id %> >
-        </td>  
-        <td>
-          <%= vuelo.salida.toLocaleDateString('es-ES') %>
-        </td>        
-        <td>
-          <%= vuelo.salida.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
-        </td>
-        <td>
-          <%= vuelo.llegada.toLocaleDateString('es-ES') %>
-        </td>        
-        <td>
-          <%= vuelo.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
-        </td>
+        <th></th>
+        <th>Fecha de salida</th>
+        <th>Hora de salida</th>
+        <th>Fecha de llegada</th>
+        <th>Hora de llegada</th>
       </tr>
-    <% }) %>
+    
+      <% vuelos.forEach(vuelo =>{ %> 
+        <tr>
+          <td>
+            <input type="radio" id=<%="vuelo" + vuelo.id %> name="vuelo" value=<%= vuelo.id %> >
+          </td>  
+          <td>
+            <%= vuelo.salida.toLocaleDateString('es-ES') %>
+          </td>        
+          <td>
+            <%= vuelo.salida.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
+          </td>
+          <td>
+            <%= vuelo.llegada.toLocaleDateString('es-ES') %>
+          </td>        
+          <td>
+            <%= vuelo.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
+          </td>
+        </tr>
+      <% }) %>
 
-  </table>
+    </table>
 
-  <input type="submit" value= "Enviar">
+    <input class="btn" type="submit" value= "Reservar">
 
-</form>
+  </form>
+</section>

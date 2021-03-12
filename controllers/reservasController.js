@@ -4,19 +4,24 @@ const Usuario = require('../models/usuario')
 const Reserva = require('../models/reserva')
 
 exports.crear_get = function (req, res, next) {
-  Promise.all([
-    Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.origen }),
-    Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.destino }),
-    Vuelo.encontrarUno({ campo: 'id', valor: req.query.vuelo })
-  ])
-    .then(result => {
-      res.render('reservas/form', {
-        vuelo: result[2],
-        aeropuertos: { origen: result[0], destino: result[1] },
-        action: '/reservas/crear/'
+  if (!req.query.vuelo) {
+    res.redirect('back')
+  } else {
+    Promise.all([
+      Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.origen }),
+      Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.destino }),
+      Vuelo.encontrarUno({ campo: 'id', valor: req.query.vuelo })
+    ])
+      .then(result => {
+        res.render('reservas/form', {
+          title: 'Confirmar reserva',
+          vuelo: result[2],
+          aeropuertos: { origen: result[0], destino: result[1] },
+          action: '/reservas/crear/'
+        })
       })
-    })
-    .catch(err => console.error(err.stack))
+      .catch(err => console.error(err.stack))
+  }
 }
 
 exports.crear_post = function (req, res, next) {
@@ -25,7 +30,6 @@ exports.crear_post = function (req, res, next) {
     Usuario.encontrarUno({ campo: 'id', valor: 14 })
   ])
     .then(result => {
-      // console.log(result)
       if (result[0] && result[1]) {
         Reserva.crear({ usuario: 14, vuelo: req.body.vuelo })
         res.redirect('/usuario/' + '14')
@@ -38,22 +42,28 @@ exports.crear_post = function (req, res, next) {
 
 
 exports.editar = function (req, res, next) {
-  Promise.all([
-    Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.origen }),
-    Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.destino }),
-    Vuelo.encontrarUno({ campo: 'id', valor: req.query.vuelo })
-  ])
-    .then(result => {
-      const reserva = req.query.reserva
-      res.render('reservas/form', {
-        vuelo: result[2],
-        aeropuertos: { origen: result[0], destino: result[1] },
-        action: '/reservas/editar/' + reserva,
-        reserva
+  if (!req.query.vuelo) {
+    res.redirect('back')
+  } else {
+    Promise.all([
+      Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.origen }),
+      Aeropuerto.encontrarUno({ campo: 'id', valor: req.query.destino }),
+      Vuelo.encontrarUno({ campo: 'id', valor: req.query.vuelo })
+    ])
+      .then(result => {
+        const reserva = req.query.reserva
+        res.render('reservas/form', {
+          title: 'Modificar reserva',
+          vuelo: result[2],
+          aeropuertos: { origen: result[0], destino: result[1] },
+          action: '/reservas/editar/' + reserva,
+          reserva
+        })
       })
-    })
-    .catch(err => console.error(err.stack))
+      .catch(err => console.error(err.stack))
+  }
 }
+
 //Actualizar datos de usuario existente
 exports.actualizar = function (req, res, err) {
   Promise.all([
@@ -69,8 +79,6 @@ exports.actualizar = function (req, res, err) {
     })
     .catch(err => console.error(err.stack))
 }
-
-
 
 //Muestra confirmación para eliminar usuario
 exports.eliminar_get = function (req, res, next) {
@@ -90,7 +98,7 @@ exports.eliminar_get = function (req, res, next) {
       }
     })
     .catch(err => {
-      console.log(err)
+      console.error(err)
     })
 }
 

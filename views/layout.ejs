@@ -3,12 +3,18 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Bebas+Neue&display=swap');
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <a href="./usuario/crear">Crear usuario</a>
-    <a href="./usuario/14"> usuario</a>
-    <p>Welcome to <%= title %></p>
-    <%- include('vuelos/busqueda') %>
+    <%- include nav %>
+    <header>
+      <h1><%= title %></h1>
+    </header>
+    <main>
+      <%- body %> 
+    </main>
+    <%- include footer %> 
   </body>
 </html>
