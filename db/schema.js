@@ -8,7 +8,8 @@ const crearUsuarios = (() => {
       email VARCHAR(30) UNIQUE NOT NULL,
       nombre VARCHAR(20) NOT NULL,
       apellidos VARCHAR(30) NOT NULL,
-      edad SMALLINT NOT NULL
+      edad SMALLINT NOT NULL, 
+      password VARCHAR(60) NOT NULL
     )
   `
   cliente

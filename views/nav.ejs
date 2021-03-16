@@ -8,11 +8,14 @@
     <li>  
       <a href="/info">Info</a>
       <a href="/contacto">Contacto</a>
-    <!-- <li>
-    <a href="/usuario/crear"> Crear usuario</a>
-    <a href="">Iniciar Sesión</a>
-  </li> -->
-      <a href="/usuario/14">Perfil</a>
+    <% if (!usuario){ %>
+        <a href="/usuario/crear"> Crear usuario</a>
+        <a href="/usuario/login">Iniciar Sesión</a>
+      </li>
+    <%} else {%>
+        <a href=<%= "/usuario/" + usuario.id %> ><%= usuario.nombre %></a>
+        <a href="/usuario/logout">Cerrar sesión</a>   
+    <% } %>
     </li>
   </ul>
 </nav>

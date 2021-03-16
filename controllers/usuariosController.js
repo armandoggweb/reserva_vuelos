@@ -5,6 +5,9 @@ const Aeropuerto = require('../models/aeropuerto')
 const { validationResult } = require("express-validator")
 const { validacionUsuario } = require('./helper');
 
+const bcrypt = require('bcryptjs')
+const passport = require('passport')
+require('../passport')
 
 //Formulario para crear usuario
 exports.crear_get = function (req, res, next) {
@@ -32,16 +35,19 @@ exports.crear_post = [
       })
       return
     } else {
-      const data = {
-        dni: req.body.dni,
-        email: req.body.email,
-        nombre: req.body.nombre,
-        apellidos: req.body.apellidos,
-        edad: req.body.edad
-      }
-
-      //Consulta para crear registro
-      Usuario.crear(data)
+      bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+        const data = {
+          dni: req.body.dni,
+          email: req.body.email,
+          nombre: req.body.nombre,
+          apellidos: req.body.apellidos,
+          edad: req.body.edad,
+          password: hashedPassword
+        }
+  
+        //Consulta para crear registro
+        Usuario.crear(data)
+      })      
 
       res.redirect('/')
     }
@@ -136,23 +142,38 @@ exports.eliminar_post = function (req, res, next) {
 
 //Muestra el perfil del usuario
 exports.perfil = function (req, res, next) {
-  Promise.all([
-    Aeropuerto.encontrarTodos(),
-    Usuario.encontrarUno({ campo: 'id', valor: req.params.id }),
-    Reserva.encontrarTodasUsuario(req.params.id)
-  ])
-    .then(result => {
-      if (result.every(r => r)) {
-        res.render('usuario/perfil', {
-          title: 'Perfil',
-          aeropuertos: result[0],
-          usuario: result[1],
-          reservas: result[2],
-          errors: null
-        })
-        return
-      }
-      res.redirect('/')
-    })
+  if(req.user){
+    Promise.all([
+      Aeropuerto.encontrarTodos(),
+      Reserva.encontrarTodasUsuario(req.params.id)
+    ])
+      .then(result => {
+        if (result[0]) {
+          res.render('usuario/perfil', {
+            title: 'Perfil',
+            aeropuertos: result[0],
+            reservas: result[1],
+            errors: null
+          })
+          return
+        }
+        res.redirect('/')
+      })
+  }else{
+    res.redirect('/usuario/login')
+  }
+}
 
+exports.login_get = function (req, res, next) {
+  res.render('usuario/login', { title: 'Iniciar sesión' })
+}
+
+exports.login_post = passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/usuario/login'
+})
+
+exports.logout = function(req, res){
+  req.logout()
+  res.redirect('/')
 }

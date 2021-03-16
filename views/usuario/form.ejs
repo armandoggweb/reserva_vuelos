@@ -2,14 +2,18 @@
   <form method="POST" action=<%= action %> >
     <label for="nombre">Nombre: </label><br>
     <input type="text" id="nombre" name="nombre" value=<%= usuario ? usuario.nombre : "" %>><br>
-    <label for="nombre">Apellidos: </label><br>
+    <label for="apellidos">Apellidos: </label><br>
     <input type="text" id="apellidos" name="apellidos" value=<%= usuario ? usuario.apellidos : "" %>><br>
-    <label for="nombre">DNI: </label><br>
+    <label for="dni">DNI: </label><br>
     <input type="text" id="dni" name="dni" value=<%= usuario ? usuario.dni : "" %>><br>
     <label for="email">Email: </label><br>
     <input type="email" id="email" name="email" value=<%= usuario ? usuario.email : "" %>><br>
-    <label for="nombre">Edad: </label><br>
-    <input type="text" id="edad" name="edad" value=<%= usuario ? usuario.edad : "" %>><br>
+    <label for="edad">Edad: </label><br>
+    <input type="number" id="edad" name="edad" value=<%= usuario ? usuario.edad : "" %>><br>
+    <% if (!usuario) {%>
+      <label for="password">Contraseña: </label><br>
+      <input type="password" id="password" name="password" ><br>
+    <% } %>
     <input class="btn" type="submit" value="Enviar">
   </form>
 

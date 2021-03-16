@@ -2,12 +2,12 @@ const cliente = require('../db/connection')
 
 //Consulta para crear un usuario nuevo
 exports.crear = data => {
-  const { dni, email, nombre, apellidos, edad } = data
+  const { dni, email, nombre, apellidos, edad, password } = data
   const consulta = {
-    text: `INSERT INTO usuarios (dni, email, nombre, apellidos, edad) 
-            VALUES ($1, $2, $3, $4, $5) 
+    text: `INSERT INTO usuarios (dni, email, nombre, apellidos, edad, password) 
+            VALUES ($1, $2, $3, $4, $5, $6) 
             RETURNING *`,
-    values: [dni, email, nombre, apellidos, edad]
+    values: [dni, email, nombre, apellidos, edad, password]
   }
 
   cliente

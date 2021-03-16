@@ -27,12 +27,12 @@ exports.crear_get = function (req, res, next) {
 exports.crear_post = function (req, res, next) {
   Promise.all([
     Vuelo.encontrarUno({ campo: 'id', valor: req.body.vuelo }),
-    Usuario.encontrarUno({ campo: 'id', valor: 14 })
+    Usuario.encontrarUno({ campo: 'id', valor: req.user.id })
   ])
     .then(result => {
       if (result[0] && result[1]) {
-        Reserva.crear({ usuario: 14, vuelo: req.body.vuelo })
-        res.redirect('/usuario/' + '14')
+        Reserva.crear({ usuario: req.user.id, vuelo: req.body.vuelo })
+        res.redirect('/usuario/' + req.user.id)
       } else {
         res.redirect('/')
       }
@@ -71,8 +71,8 @@ exports.actualizar = function (req, res, err) {
   ])
     .then(result => {
       if (result) {
-        Reserva.actualizar({ usuario: 14, vuelo: req.body.vuelo, id: req.params.id })
-        res.redirect('/usuario/' + '14')
+        Reserva.actualizar({ usuario: req.user.id, vuelo: req.body.vuelo, id: req.params.id })
+        res.redirect('/usuario/' + req.user.id)
       } else {
         res.redirect('/')
       }
@@ -90,7 +90,6 @@ exports.eliminar_get = function (req, res, next) {
       if (result) {
         res.render('reservas/eliminar', {
           title: 'Eliminar reserva',
-          usuario: result,
           errors: null
         })
       } else {
