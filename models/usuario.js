@@ -12,7 +12,10 @@ exports.crear = data => {
 
   cliente
     .query(consulta)
-    .then(res => console.log('Usuario creado con éxito'))
+    .then(res => {
+      console.log('Usuario creado con éxito')
+      return res.rows[0]
+    })
     .catch(err => console.error(err.stack))
 }
 

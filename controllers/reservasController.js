@@ -24,25 +24,33 @@ exports.crear_get = function (req, res, next) {
   }
 }
 
-exports.crear_post = function (req, res, next) {
-  Promise.all([
-    Vuelo.encontrarUno({ campo: 'id', valor: req.body.vuelo }),
-    Usuario.encontrarUno({ campo: 'id', valor: req.user.id })
-  ])
-    .then(result => {
-      if (result[0] && result[1]) {
-        Reserva.crear({ usuario: req.user.id, vuelo: req.body.vuelo })
-        res.redirect('/usuario/' + req.user.id)
-      } else {
-        res.redirect('/')
-      }
-    })
-    .catch(err => console.error(err.stack))
-}
+exports.crear_post = [
+  function (req, res, next) {
+    if (!req.user) {
+      res.redirect('/usuario/login')
+    }
+    next()
+  }
+  , function (req, res, next) {
+    Promise.all([
+      Vuelo.encontrarUno({ campo: 'id', valor: req.body.vuelo }),
+      Usuario.encontrarUno({ campo: 'id', valor: req.user.id })
+    ])
+      .then(result => {
+        if (result[0] && result[1]) {
+          Reserva.crear({ usuario: req.user.id, vuelo: req.body.vuelo })
+          req.flash('mensaje_exito', 'Reserva realizada con éxito')
+          res.redirect('/usuario/' + req.user.id)
+        } else {
+          res.redirect('/')
+        }
+      })
+      .catch(err => console.error(err.stack))
+  }]
 
 
 exports.editar = function (req, res, next) {
-  if (!req.query.vuelo) {
+  if (!req.user || !req.query.vuelo) {
     res.redirect('back')
   } else {
     Promise.all([
@@ -51,60 +59,89 @@ exports.editar = function (req, res, next) {
       Vuelo.encontrarUno({ campo: 'id', valor: req.query.vuelo })
     ])
       .then(result => {
-        const reserva = req.query.reserva
-        res.render('reservas/form', {
-          title: 'Modificar reserva',
-          vuelo: result[2],
-          aeropuertos: { origen: result[0], destino: result[1] },
-          action: '/reservas/editar/' + reserva,
-          reserva
-        })
+        if (result.every(r => r)) {
+          res.render('reservas/form', {
+            title: 'Modificar reserva',
+            vuelo: result[2],
+            aeropuertos: { origen: result[0], destino: result[1] },
+            action: '/reservas/editar/' + req.query.reserva,
+            reserva: req.query.reserva
+          })
+        } else {
+          res.redirect('/')
+        }
       })
       .catch(err => console.error(err.stack))
   }
 }
 
 //Actualizar datos de usuario existente
-exports.actualizar = function (req, res, err) {
-  Promise.all([
-    Reserva.encontrarUno({ campo: 'id', valor: req.params.id }),
-  ])
-    .then(result => {
-      if (result) {
-        Reserva.actualizar({ usuario: req.user.id, vuelo: req.body.vuelo, id: req.params.id })
-        res.redirect('/usuario/' + req.user.id)
-      } else {
-        res.redirect('/')
-      }
-    })
-    .catch(err => console.error(err.stack))
-}
+exports.actualizar = [
+  function (req, res, next) {
+    if (!req.user) {
+      res.redirect('/usuario/login')
+    }
+    next()
+  }
+  , function (req, res, err) {
+    Reserva.encontrarUno({ campo: 'id', valor: req.params.id })
+      .then(result => {
+        if (result.usuario_id == req.user.id) {
+          Reserva.actualizar({ usuario: req.user.id, vuelo: req.body.vuelo, id: req.params.id })
+          req.flash('mensaje_exito', 'Reserva modificada con éxito')
+          res.redirect('/usuario/' + req.user.id)
+        } else {
+          res.redirect('/')
+        }
+      })
+      .catch(err => console.error(err.stack))
+  }]
 
 //Muestra confirmación para eliminar usuario
-exports.eliminar_get = function (req, res, next) {
-  Reserva.encontrarUno({
-    campo: 'id',
-    valor: req.params.id
-  })
-    .then(result => {
-      if (result) {
-        res.render('reservas/eliminar', {
-          title: 'Eliminar reserva',
-          errors: null
-        })
-      } else {
-        res.redirect('/')
-      }
+exports.eliminar_get = [
+  function (req, res, next) {
+    if (!req.user) {
+      res.redirect('/usuario/login')
+    }
+    next()
+  }
+  , function (req, res, next) {
+    Reserva.encontrarUno({
+      campo: 'id',
+      valor: req.params.id
     })
-    .catch(err => {
-      console.error(err)
-    })
-}
+      .then(result => {
+        if (result.usuario_id == req.user.id) {
+          res.render('reservas/eliminar', {
+            title: 'Eliminar reserva',
+            usuario_id: req.user.id,
+            errors: null
+          })
+        } else {
+          res.redirect('/')
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }]
 
 //Borra el usuario
 exports.eliminar_post = function (req, res, next) {
-  Reserva.eliminar(req.params.id)
-    .then(resultado => res.redirect('/'))
-    .catch(err => console.error(err.stack))
+  if (!req.user) {
+    res.redirect('/usuario/login')
+  } else {
+    if (req.user.id == req.body.usuario_id) {
+      Reserva.eliminar(req.params.id)
+        .then(resultado => {
+          req.flash('mensaje_exito', 'Reserva eliminada con éxito')
+          res.redirect('/usuario/' + req.user.id)
+          return
+        })
+        .catch(err => console.error(err.stack))
+    } else {
+      res.redirect('/')
+    }
+  }
 }
 

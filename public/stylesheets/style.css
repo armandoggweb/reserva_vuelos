@@ -21,11 +21,10 @@ ul {
   list-style: none;
 }
 
-/* h3{
-  font-size: 1.5em;
-  margin: 30px;
-} */
-
+a{
+  text-decoration: none;
+  color:#ffffff;
+}
 nav,
 footer {
   background-color: #69007f;
@@ -54,14 +53,12 @@ nav a {
   display: inline-block;
   height: 75px;
   min-width: 100px;
-  text-decoration: none;
   text-align: center;
   line-height: 75px;
   padding: 0px 10px;
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  color: #ffffff;
 }
 
 nav li:not(:first-child) a:hover {
@@ -91,7 +88,9 @@ main {
   background-size: cover;
   background-position: center;
 }
-
+main a:hover, footer a:hover{
+  text-decoration: underline;
+}
 main>* {
   max-width: 1000px;
   min-height: 700px;
@@ -124,6 +123,7 @@ select {
 
 .perfil {
   display: flex;
+  flex-direction: column;
 }
 
 .perfil div:first-child {
@@ -133,15 +133,21 @@ select {
 
 .perfil-acciones {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .mis-reservas {
-  margin: 50px 20px;
+  margin: 20px 0;
   padding: 10px;
-  background-color: blanchedalmond;
+  min-width: 500px;
+  text-align: center;
+  background: linear-gradient(to bottom right, #cf5ce2, #ffc947);
+  border-radius: 10px;
 }
 
+.mis-reservas h3{
+  font-size: larger;
+}
 .disponibles {
   text-align: center;
 }
@@ -201,6 +207,39 @@ footer a {
   color: #ffffff;
 }
 
+.flash,
+.error-list {
+  width: 60%;
+  margin-bottom: 10px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.exito, .error{
+  height: 50px;
+  line-height: 50px;
+}
+.exito {
+  border-color: #66bb6a;
+  background-color: rgba(152, 238, 153, 0.5);
+}
+
+.error,
+.error-list {
+  border-color: #ef5350;
+  background-color: rgba(255, 134, 124, 0.5);
+}
+
+.error-list {
+  height: fit-content;
+
+}
+.error-list li{
+  height: 20px;
+  margin: 5px 0;
+}
+
+
 .btn {
   height: 30px;
   width: 100px;
@@ -223,7 +262,6 @@ footer a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 }
 
 tr {

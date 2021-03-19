@@ -3,7 +3,7 @@
 
   <form method="GET" action=<%= action %> >
     <% if( reserva ){%> 
-      <input type="hidden" name ="reserva" value=<%= reserva %> >
+      <input type="hidden" name ="reserva" value=<%= reserva.id %> >
     <% } %>
     <input type="hidden" name ="origen" value=<%= aeropuertos.origen.id %> >
     <input type="hidden" name ="destino" value=<%= aeropuertos.destino.id %> >
@@ -12,24 +12,24 @@
         <th></th>
         <th>Fecha de salida</th>
         <th>Hora de salida</th>
-        <th>Fecha de llegada</th>
         <th>Hora de llegada</th>
       </tr>
     
       <% vuelos.forEach(vuelo =>{ %> 
         <tr>
           <td>
-            <input type="radio" id=<%="vuelo" + vuelo.id %> name="vuelo" value=<%= vuelo.id %> >
+            <% if(reserva && reserva.vuelo_id == vuelo.id){ %> 
+              <input type="radio" name="vuelo" value=<%= vuelo.id %> checked="checked">
+            <% } else { %> 
+              <input type="radio" name="vuelo" value=<%= vuelo.id %> >
+            <% } %> 
           </td>  
           <td>
             <%= vuelo.salida.toLocaleDateString('es-ES') %>
           </td>        
           <td>
             <%= vuelo.salida.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
-          </td>
-          <td>
-            <%= vuelo.llegada.toLocaleDateString('es-ES') %>
-          </td>        
+          </td>   
           <td>
             <%= vuelo.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %>
           </td>
@@ -37,8 +37,10 @@
       <% }) %>
 
     </table>
-
-    <input class="btn" type="submit" value= "Reservar">
-
+    <% if(reserva){ %> 
+      <input class="btn" type="submit" value= "Modificar">
+    <% } else { %> 
+      <input class="btn" type="submit" value= "Reservar">
+    <% } %>
   </form>
 </section>

@@ -11,18 +11,18 @@ passport.use(
       Usuario.encontrarUno({ campo: 'email', valor: email })
         .then(user => {
           if (!user) {
-            return done(null, false, { message: "Email no existe o es incorrecto" });
+            return done(null, false, { message: "Email no existente o incorrecto" });
           }
           bcrypt.compare(password, user.password, (err, res) => {
             if (res) {
-              return done(null, user)
+              return done(null, user, {message: `Bienvenido ${user.nombre}`})
             } else {
               return done(null, false, { message: "Contraseña incorrecta" })
             }
           })
         })
         .catch(err => {
-          return done(null, false, {message: 'jojo'});
+          return done(null, false, {message: 'error'});
         })
     })
 )

@@ -17,7 +17,6 @@
   <h3><%= typeof reserva != 'undefined' ? '¿Desea modificar su reserva?' : '¿Desea finalizar su reserva? '%> </h3>
   <form method="POST" action=<%= action %> >
     <input type="hidden" name="vuelo" value=<%= vuelo.id %> >
-    <input type="hidden" name="usuario" <%#= usuario.id %> >
     <input class="btn" type="submit" value="Enviar">
   </form>
 </section>

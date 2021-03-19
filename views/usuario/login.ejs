@@ -1,4 +1,8 @@
 <section class="login alinear-vertical">
+  <% if (mensaje_error.length > 0) { %> 
+    <p class='flash error'><%= mensaje_error %></p>
+  <% } %>
+
   <form method="POST" action="/usuario/login">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email"><br>

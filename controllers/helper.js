@@ -39,6 +39,6 @@ exports.validacionUsuario = function() {
           })
       }),
 
-    body('edad').isInt({ min: 18 }).withMessage('Debe ser mayor de edad')
+    body('edad').isInt({ min: 18 }).withMessage('Debe ser mayor de edad'),
   ]
 }

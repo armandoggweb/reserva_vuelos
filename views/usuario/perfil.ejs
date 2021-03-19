@@ -1,14 +1,11 @@
-<section class="perfil">
-  <div>
-    <h1> <%= usuario.nombre %> </h1>
-    <div class="perfil-acciones">
-      <a href=<%='editar/' + usuario.id %> > Editar perfil</a>
-      <a href="logout">Cerrar Sesión</a>
-      <a href=<%='logout/' + usuario.id %> > Eliminar cuenta</a>
-    </div>
-  </div>
-  <aside class="mis-reservas">
-    <h3>Mis reservas</h3>
+<section class="perfil alinear-vertical">
+  <% if (mensaje_exito.length > 0) { %> 
+    <p class="flash exito"><%= mensaje_exito %></p><br>
+  <% } %>
+  <h2> <%= usuario.nombre %> </h2>
+  <a href=<%='editar/' + usuario.id %> > Editar perfil</a>
+  <article class="mis-reservas">
+    <h2>Mis reservas</h2>
     <table>
       <tr>
         <th>Identificador</th>
@@ -27,14 +24,16 @@
               <%= reserva.salida.toLocaleDateString('es-ES') %>
             </td>     
             <td>
-              <%= aeropuertos[reserva.origen].ciudad %> 
-              (<%= aeropuertos[reserva.origen].siglas %>) /
-              <%= aeropuertos[reserva.destino].ciudad %> 
-              (<%= aeropuertos[reserva.destino].siglas %>)
+              <%= aeropuertos[reserva.origen - 1].ciudad %> 
+              (<%= aeropuertos[reserva.origen - 1].siglas %>) / 
+              <br>
+              <%= aeropuertos[reserva.destino - 1].ciudad %> 
+              (<%= aeropuertos[reserva.destino - 1].siglas %>)
             </td>    
             <td>
               <%= reserva.salida.toLocaleTimeString('es-ES'
                 , {hour: '2-digit', minute: '2-digit'}) %> /
+                <br>
               <%= reserva.llegada.toLocaleTimeString('es-ES'
               , {hour: '2-digit', minute: '2-digit'}) %>
             </td>   
@@ -46,12 +45,14 @@
                   + `&reserva=${reserva.id}` %> >
                 Modificar
               </a> 
+              <br>
               <a href=<%= '/reservas/eliminar/' + reserva.id %> >Eliminar</a>
             </td>
           </tr>
         <% }) %>
       <% } %>
     </table>
-  </aside>
-  </ul>
+  </article>
+  <a href=<%='/usuario/eliminar/' + usuario.id %> > Eliminar cuenta</a>
+
 </section>

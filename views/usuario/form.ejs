@@ -1,24 +1,10 @@
 <section class="usuario-form alinear-vertical">
-  <form method="POST" action=<%= action %> >
-    <label for="nombre">Nombre: </label><br>
-    <input type="text" id="nombre" name="nombre" value=<%= usuario ? usuario.nombre : "" %>><br>
-    <label for="apellidos">Apellidos: </label><br>
-    <input type="text" id="apellidos" name="apellidos" value=<%= usuario ? usuario.apellidos : "" %>><br>
-    <label for="dni">DNI: </label><br>
-    <input type="text" id="dni" name="dni" value=<%= usuario ? usuario.dni : "" %>><br>
-    <label for="email">Email: </label><br>
-    <input type="email" id="email" name="email" value=<%= usuario ? usuario.email : "" %>><br>
-    <label for="edad">Edad: </label><br>
-    <input type="number" id="edad" name="edad" value=<%= usuario ? usuario.edad : "" %>><br>
-    <% if (!usuario) {%>
-      <label for="password">Contraseña: </label><br>
-      <input type="password" id="password" name="password" ><br>
-    <% } %>
-    <input class="btn" type="submit" value="Enviar">
-  </form>
+  <% if (mensaje_error.length > 0) { %> 
+    <p class='flash error'><%= mensaje_error %></p>
+  <% } %>
 
   <% if(errors) {%>
-    <ul class="errors">
+    <ul class="error-list">
       <% errors.forEach( err => {%>
         <li>
           <%= err.msg %>
@@ -26,4 +12,23 @@
       <% }) %> 
     </ul>
   <% } %> 
+
+  <form method="POST" action=<%= action %> >
+    <label for="nombre">Nombre: </label><br>
+    <input type="text" id="nombre" name="nombre" value=<%= usuarioCampos ? usuarioCampos.nombre : "" %>><br>
+    <label for="apellidos">Apellidos: </label><br>
+    <input type="text" id="apellidos" name="apellidos" value=<%= usuarioCampos ? usuarioCampos.apellidos : "" %>><br>
+    <label for="dni">DNI: </label><br>
+    <input type="text" id="dni" name="dni" value=<%= usuarioCampos ? usuarioCampos.dni : "" %>><br>
+    <label for="email">Email: </label><br>
+    <input type="email" id="email" name="email" value=<%= usuarioCampos ? usuarioCampos.email : "" %>><br>
+    <label for="edad">Edad: </label><br>
+    <input type="number" id="edad" name="edad" value=<%= usuarioCampos ? usuarioCampos.edad : "" %>><br>
+    <% if (!usuario || !usuario.password) {%>
+      <label for="password">Contraseña: </label><br>
+      <input type="password" id="password" name="password" required minlength="8" maxlength="30" ><br>
+    <% } %>
+    <input class="btn" type="submit" value="Enviar">
+  </form>
+
 </section>

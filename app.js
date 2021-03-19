@@ -9,7 +9,7 @@ const logger = require('morgan');
 const session = require('express-session')
 const passport = require('passport')
 
-
+var flash = require('connect-flash');
 
 const layouts = require('express-ejs-layouts');
 
@@ -18,6 +18,7 @@ const usuariosRouter = require('./routes/usuarios');
 const estaticosRouter = require('./routes/estaticos')
 const vuelosRouter = require('./routes/vuelos')
 const reservasRouter = require('./routes/reservas');
+const cookieParser = require('cookie-parser');
 
 
 const app = express();
@@ -32,13 +33,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({ secret: "proyecto", resave: false, saveUninitialized: true }))
+app.use(cookieParser('proyecto'))
+app.use(session({ cookie:{maxAge: 60000}, secret: "proyecto", resave: false, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use(flash());
+
+
 app.use(function (req, res, next) {
   res.locals.title = 'default'
+  res.locals.errors = null
   res.locals.usuario = req.user
+  res.locals.mensaje_error = req.flash('mensaje_error');
+  res.locals.mensaje_exito = req.flash('mensaje_exito');
   next()
 })
 

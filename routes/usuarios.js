@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-
+const passport = require('passport')
+require('../passport')
 const controlador = require('../controllers/usuariosController')
 
 
@@ -10,7 +11,13 @@ router.post('/crear', controlador.crear_post)
 
 router.get('/login', controlador.login_get)
 
-router.post('/login', controlador.login_post)
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  successFlash: true,
+  badRequestMessage: 'Email o contraseña inválidos',
+  failureRedirect: '/usuario/login',
+  failureFlash: true
+}))
 
 router.get('/logout', controlador.logout)
 
