@@ -11,6 +11,7 @@ const logger = require('morgan');
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
+const pgSession = require('connect-pg-simple')(session);
 const passport = require('passport')
 
 const flash = require('connect-flash');
@@ -29,9 +30,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(layouts)
 
-if (app.get('env') === 'production'){
+if (app.get('env') === 'production') {
   app.use(logger('combined'));
-}else{
+} else {
   app.use(logger('dev'));
 }
 
@@ -41,7 +42,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //configuración de sesiones y cookies
 app.use(cookieParser('proyecto'))
-app.use(session({ cookie:{maxAge: 60000}, secret: "proyecto", resave: false, saveUninitialized: true }))
+app.use(session({
+  store:new pgSession,
+  cookie: { maxAge: 60000 },
+  secret: "proyecto",
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 

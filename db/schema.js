@@ -63,3 +63,23 @@ const crearReservas = (() => {
     .then(res => console.log('Tabla reservas creada con éxito'))
     .catch(err => console.error(err.stack))
 })()
+
+const sessionStore = (() => {
+  const consulta = `
+    CREATE TABLE  IF NOT EXISTS "session" (
+      "sid" varchar NOT NULL COLLATE "default",
+      "sess" json NOT NULL,
+      "expire" timestamp(6) NOT NULL
+    )
+    WITH (OIDS=FALSE);
+    
+    ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+    
+    CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+  `
+
+  cliente
+    .query(consulta)
+    .then(res => console.log('Tabla sesiones creada con éxito'))
+    .catch(err => console.error(err.stack))
+})()
