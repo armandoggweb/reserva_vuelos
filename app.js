@@ -1,29 +1,30 @@
 require('./db/connection')
 
-// import('./models/usuario.js')
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const compression = require('compression')
+const helmet = require('helmet')
+
+
 const logger = require('morgan');
 
+const cookieParser = require('cookie-parser');
 const session = require('express-session')
 const passport = require('passport')
 
-var flash = require('connect-flash');
+const flash = require('connect-flash');
 
 const layouts = require('express-ejs-layouts');
-
 
 const usuariosRouter = require('./routes/usuarios');
 const estaticosRouter = require('./routes/estaticos')
 const vuelosRouter = require('./routes/vuelos')
 const reservasRouter = require('./routes/reservas');
-const cookieParser = require('cookie-parser');
-
 
 const app = express();
 
-// view engine setup
+//configuración motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(layouts)
@@ -33,14 +34,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//configuración de sesiones y cookies
 app.use(cookieParser('proyecto'))
 app.use(session({ cookie:{maxAge: 60000}, secret: "proyecto", resave: false, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 
+//mensajes flash
 app.use(flash());
 
-
+//Valores por de fecto para las variables locales en las respuestas
 app.use(function (req, res, next) {
   res.locals.title = 'default'
   res.locals.errors = null
@@ -50,23 +53,30 @@ app.use(function (req, res, next) {
   next()
 })
 
+//Compresor de las rutas en las respuestas
+app.use(compression())
+
+//Protege de las vulnerabilidades comunes en la web
+app.use(helmet())
+
+//Rutas
 app.use('/', estaticosRouter)
 app.use('/usuario', usuariosRouter);
 app.use('/vuelos', vuelosRouter)
 app.use('/reservas', reservasRouter)
 
-// catch 404 and forward to error handler
+// Captura un error 404 y pasa al gestor de errores
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Gestor de errores
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
+  // Asigna loserroes a las variables locales solamente en desarrollo
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Renderiza la página de error
   res.status(err.status || 500);
   res.render('error');
 });

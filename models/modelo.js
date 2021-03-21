@@ -22,7 +22,7 @@ module.exports = class Modelo {
           console.log('Registro econtrado con éxito')
           return res.rows[0]
         }else{
-          console.log('no tucucu')
+          console.log('No se ha encontrado ningún registro')
         }
       })
       .catch(err => console.error(err.stack))

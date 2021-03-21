@@ -57,7 +57,7 @@ module.exports = class AeropuertoModelo extends Modelo {
     return cliente
       .query(consulta)
       .then(res => {
-        console.log(`Se ha ejecutado exitosamente`)
+        console.log('Se ha ejecutado exitosamente')
         if (res.rows.length > 0) return res.rows
       })
       .catch(err => console.log(err.stack))
