@@ -1,4 +1,6 @@
-const Usuario = require('./models/usuario')
+const UsuarioModelo = require('./models/usuario')
+const Usuario = new UsuarioModelo
+
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy

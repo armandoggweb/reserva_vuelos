@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-const controlador = require('../controllers/vuelosController')
+const VuelosController = require('../controllers/vuelos')
+const controlador = new VuelosController
 
-router.get('/disponibles', controlador.disponibles)
+router.get('/disponibles', controlador.disponibles())
 
 module.exports = router

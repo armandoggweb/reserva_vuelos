@@ -2,14 +2,19 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 require('../passport')
-const controlador = require('../controllers/usuariosController')
 
+const UsuariosControlador = require('../controllers/usuarios')
+const controlador = new UsuariosControlador
 
-router.get('/crear', controlador.crear_get)
+//Rutas disponibles para el controlador Usuario
 
-router.post('/crear', controlador.crear_post)
+//Crear usuario
+router.get('/crear', controlador.crear_get())
 
-router.get('/login', controlador.login_get)
+router.post('/crear', controlador.crear_post())
+
+//Sesión del usuario
+router.get('/login', controlador.login_get())
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
@@ -19,16 +24,19 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: true
 }))
 
-router.get('/logout', controlador.logout)
+router.get('/logout', controlador.logout())
 
-router.get('/editar/:id', controlador.editar_get)
+//Modificar usuario
+router.get('/editar/:id', controlador.editar_get())
 
-router.post('/editar/:id', controlador.editar_post)
+router.post('/editar/:id', controlador.editar_post())
 
-router.get('/eliminar/:id', controlador.eliminar_get)
+//Eliminar usaurio
+router.get('/eliminar/:id', controlador.eliminar_get())
 
-router.post('/eliminar/:id', controlador.eliminar_post)
+router.post('/eliminar/:id', controlador.eliminar_post())
 
-router.get('/:id', controlador.perfil)
+//Perfil del usuario
+router.get('/:id', controlador.perfil())
 
 module.exports = router;

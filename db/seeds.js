@@ -1,6 +1,11 @@
 require('./schema')
-const Aeropuerto = require('../models/aeropuerto')
-const Vuelo = require('../models/vuelo')
+
+const AeropuertoModelo = require('../models/aeropuerto')
+const Aeropuerto = new AeropuertoModelo
+
+const VueloModelo = require('../models/vuelo')
+const Vuelo = new VueloModelo
+
 // const aeropuertosRAW = require('./aeropuertos.json').data[1].data
 
 // aeropuertosRAW.map(aeropuerto => {

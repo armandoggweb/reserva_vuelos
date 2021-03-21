@@ -1,5 +1,9 @@
-const { body } = require("express-validator");
-const Usuario = require('../models/usuario')
+const { body } = require("express-validator")
+
+const UsuarioModelo = require('../models/usuario')
+const Usuario = new UsuarioModelo
+
+//Helper para abstraer la validación de los usuarios de la clase
 
 exports.validacionUsuario = function() {
   return [
