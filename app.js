@@ -6,9 +6,6 @@ const path = require('path');
 const compression = require('compression')
 const helmet = require('helmet')
 
-
-const logger = require('morgan');
-
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
 const passport = require('passport')
@@ -30,6 +27,7 @@ app.set('view engine', 'ejs');
 app.use(layouts)
 
 if (app.get('env') === 'production'){
+  const logger = require('morgan');
   app.use(logger('dev'));
 }
 
