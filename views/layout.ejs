@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="es-ES">
   <head>
-    <title><%= title ? title : '' %></title>
+    <% if(typeof title == 'undefined'){ %> 
+      <title><%= 'VuelosAG' %></title>
+    <% }else{ %> 
+      <title><%= title %></title>
+    <% } %> 
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
