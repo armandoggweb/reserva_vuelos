@@ -10,10 +10,10 @@ exports.validacionUsuario = function() {
     body('nombre')
       .trim()
       .isLength({ min: 2 }).escape().withMessage('Debe introducir un nombre').bail()
-      .isAlphanumeric('es-ES').withMessage('Nombre debe contener solamente carácteres alfanuméricos'),
+      .isAlpha('es-ES').withMessage('Nombre debe contener solamente carácteres alfanuméricos'),
     body('apellidos').trim()
       .isLength({ min: 2 }).escape().withMessage('Debe introducir apellidos').bail()
-      .isAlphanumeric('es-ES').withMessage('Apellidos debe contener solamente carácteres alfanuméricos'),
+      .isAlpha('es-ES', {ignore: " "}).withMessage('Apellidos debe contener solamente carácteres alfanuméricos'),
     body('email')
       .isEmail().withMessage('Email no válido').bail()
       .normalizeEmail()
