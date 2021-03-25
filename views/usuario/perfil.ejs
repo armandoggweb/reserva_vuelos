@@ -5,16 +5,17 @@
   <h2> <%= usuario.nombre %> </h2>
   <a href=<%='editar/' + usuario.id %> > Editar perfil</a>
   <article class="mis-reservas">
-    <h3>Mis reservas</h3>
-    <table>
-      <tr>
-        <th>Id.</th>
-        <th>Fecha</th>
-        <th>Origen/<br>Destino</th>
-        <th>Hora <br>salida/<br>llegada</th>
-        <th></th>
-      </tr>
-      <% if(reservas){ %>
+    <% if(reservas){ %>
+      <h3>Mis reservas</h3>
+      <table>
+        <tr>
+          <th>Id.</th>
+          <th>Fecha</th>
+          <th>Origen/<br>Destino</th>
+          <th>Hora <br>salida/<br>llegada</th>
+          <th></th>
+        </tr>
+      
         <% reservas.forEach(reserva =>{ %> 
           <tr>
             <td>
@@ -56,6 +57,8 @@
             </td>
           </tr>
         <% }) %>
+      <% } else { %>
+        <a href='/'>Realiza tu primera reserva</a>
       <% } %>
     </table>
   </article>
