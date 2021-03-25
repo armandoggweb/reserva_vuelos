@@ -1,22 +1,18 @@
 <section class="busqueda alinear-vertical">
   <h2>Busca tu vuelo</h2>
   <form method="GET" action="/vuelos/disponibles">
-    <div>
-      <label for="origen">Origen: </label><br>
-      <select id="origen" name="origen">
-        <% aeropuertos.forEach(aeropuerto => { %>
-          <option value=<%= aeropuerto.id %> > <%= aeropuerto.ciudad %> </option>
-        <% }) %>
-      </select> 
-    </div>
-    <div>
-      <label for="destino">Destino: </label><br>
-      <select id="destino" name="destino">
-        <% aeropuertos.forEach(aeropuerto => { %>
-          <option value=<%= aeropuerto.id %> > <%= aeropuerto.ciudad %> </option>
-        <% }) %>
-      </select> 
-    </div>
+    <label for="origen">Origen</label>
+    <select id="origen" name="origen">
+      <% aeropuertos.forEach(aeropuerto => { %>
+        <option value=<%= aeropuerto.id %> > <%= aeropuerto.ciudad %> </option>
+      <% }) %>
+    </select><br>
+    <label for="destino">Destino</label>
+    <select id="destino" name="destino">
+      <% aeropuertos.forEach(aeropuerto => { %>
+        <option value=<%= aeropuerto.id %> > <%= aeropuerto.ciudad %> </option>
+      <% }) %>
+    </select><br>
     <input class="btn btn-buscar"type="submit" value="Buscar">
   </form>
 </section>

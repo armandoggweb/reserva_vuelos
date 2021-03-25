@@ -2,29 +2,47 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 body {
-  font: 16px Roboto, Helvetica, Arial, sans-serif;
-
+  font: 1em Roboto, Helvetica, Arial, sans-serif;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.75em;
 }
 
 h2 {
+  font-size: 2.5em;
+}
+
+h3 {
   font-size: 2em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+p {
+  font-size: 1em;
+}
+
+small {
+  font-size: 0.5em;
 }
 
 ul {
   list-style: none;
 }
 
-a{
+a {
+  font-size: 1em;
   text-decoration: none;
-  color:#ffffff;
+  color: #ffffff;
 }
+
 nav,
 footer {
   background-color: #69007f;
@@ -32,50 +50,62 @@ footer {
 }
 
 nav {
-  padding: 0;
-  height: 75px;
   position: sticky;
   top: 0;
-  border-bottom: solid 2px #ff9800;
-}
-
-nav img {
-  height: 70px;
-  width: 70px;
-}
-
-nav li {
-  margin: 0 30px;
-  padding: 0;
-}
-
-nav a {
-  display: inline-block;
-  height: 75px;
-  min-width: 100px;
-  text-align: center;
-  line-height: 75px;
-  padding: 0px 10px;
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-nav li:not(:first-child) a:hover {
-  background-color: #cf5ce2;
-  color: #000000;
 }
 
 nav ul {
+  height: 8vh;
+  border-bottom: solid 0.25em #ff9800;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-header {
-  height: 100px;
+nav li {
+  margin: 0 1em;
+}
+
+.logo {
+  height: 6vh;
+}
+
+.nav-links {
+  position: absolute;
+  top: 8vh;
+  display: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.nav-links li {
+  background-color: rgb(155, 39, 175, 0.8);
+  margin: 0;
+  border-bottom: solid 0.15em #ff9800;
+  width: 100vw;
   text-align: center;
-  line-height: 100px;
+}
+
+.nav-links a {
+  font-size: 3vh;
+  display: block;
+  font-weight: 900;
+  padding: 0.25em;
+}
+
+.menu-icon {
+  display: block;
+}
+
+.menu-icon>img {
+  height: 4vh;
+  cursor: pointer;
+}
+
+header {
+  height: 10vh;
+  text-align: center;
+  line-height: 10vh;
   font-family: 'Bebas Neue', cursive;
   font-style: italic;
   font-weight: 900;
@@ -87,120 +117,116 @@ main {
   background: url('../images/plane-wing.jpg') no-repeat;
   background-size: cover;
   background-position: center;
+  text-align: justify;
 }
-main a:hover, footer a:hover{
-  text-decoration: underline;
+
+main img {
+  height: 30vh;
 }
+
+main p {
+  font-weight: 900;
+  text-align: center;
+}
+
 main>* {
-  max-width: 1000px;
-  min-height: 700px;
-  padding-top: 30px;
-  margin: 0 auto;
+  min-height: 70vh;
   background-color: rgba(207, 92, 226, 0.5);
 }
 
-.busqueda {}
-
-.busqueda form {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.busqueda input {
-  align-self: flex-end;
-}
-
-select {
-  font-size: 1em;
-}
-
-.busqueda div {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-
-.perfil {
-  display: flex;
-  flex-direction: column;
-}
-
-.perfil div:first-child {
-  background-color: blanchedalmond;
-  padding: 10px;
-}
-
-.perfil-acciones {
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .mis-reservas {
-  margin: 20px 0;
-  padding: 10px;
-  min-width: 500px;
-  text-align: center;
-  background: linear-gradient(to bottom right, #cf5ce2, #ffc947);
-  border-radius: 10px;
+  width: 80vw;
+  min-width: fit-content;
+  min-width: -moz-fit-content;
 }
 
-.mis-reservas h3{
-  font-size: larger;
-}
-.disponibles {
-  text-align: center;
-}
-
-.disponibles h3 {
-  margin: 20px 0;
-}
-
-.disponibles form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 600px;
+.mis-reservas table {
   margin: 0 auto;
 }
 
-.disponibles input[type=submit] {
-  margin-top: 20px;
+.mis-reservas td {
+  padding: 0.5em;
+}
+
+.mis-reservas tr:nth-child(odd) td {
+  padding-bottom: 2em;
+  line-height: 1em;
+  padding: 0.5em;
+}
+
+.disponibles table,
+.confirmar-reserva>ul,
+.mis-reservas {
+  background: linear-gradient(to bottom right, #cf5ce2, #ffc947);
+  margin: 1em 0;
+  border-radius: 5px;
+}
+
+.mis-reservas,
+.disponibles table {
+  text-align: center;
+}
+
+.confirmar-reserva>ul {
+  padding: 0.5em;
+  width: -webkit-fill-available;
+  width: -moz-fill-available;
+}
+
+form {
+  margin: 1em;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+}
+
+form>* {
+  margin: 0.1em;
+}
+
+input,
+select,
+textarea {
+  width: inherit;
+  max-width: inherit;
   align-self: center;
+  padding: 0.25em;
+  border-radius: 5px;
+  background-color: #EEE7E7;
+  border: none;
 }
 
-.confirmar-reserva>*,
-.eliminar-usuario>*,
-.eliminar-reserva>* {
-  margin: 10px 0;
+input[type=radio] {
+  margin: 0.5em;
 }
 
-.usuario-form input:not(input[type=submit]) {
-  font-size: 1.5em;
-  margin: 10px 0;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.usuario-form label {
-  font-size: 1.5em;
+form label {
+  font-weight: 900;
 }
 
 .detalle {
-  margin-left: 40px;
+  margin: 0.5em;
+  padding: 0.5em;
+  background-color: rgb(255, 255, 255, 0.1);
+  border-radius: 5px;
 }
 
-.contacto>* {
-  margin-bottom: 20px;
-}
-
-.contacto form>* {
-  margin-bottom: 10px;
+.info>* {
+  max-width: 80vw;
 }
 
 footer {
-  height: fit-content;
-  padding: 10px 0;
+  height: 12vh;
+  padding: 1em 0;
+  text-align: justify;
+}
+
+footer>* {
+  margin: 0 auto;
+}
+
+footer img {
+  height: 3vh;
 }
 
 footer a {
@@ -209,66 +235,122 @@ footer a {
 
 .flash,
 .error-list {
-  width: 60%;
-  margin-bottom: 10px;
+  width: 80vw;
+  padding: 1em;
   text-align: center;
-  border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 3px;
 }
-.exito, .error{
-  height: 50px;
-  line-height: 50px;
+
+.exito,
+.error {
+  font-weight: 900;
+  height: fit-content;
+  height: -moz-fit-content;
 }
+
 .exito {
-  border-color: #66bb6a;
   background-color: rgba(152, 238, 153, 0.5);
 }
 
 .error,
 .error-list {
-  border-color: #ef5350;
   background-color: rgba(255, 134, 124, 0.5);
 }
 
 .error-list {
   height: fit-content;
-
+  height: -moz-fit-content;
+  margin-bottom: 1em;
 }
-.error-list li{
-  height: 20px;
-  margin: 5px 0;
-}
-
 
 .btn {
-  height: 30px;
-  width: 100px;
-  padding: 5px 10px;
-  border: 2px solid black;
-  border-radius: 5px;
-  background-color: white;
-  color: purple;
-  font-weight: 800;
+  max-width: 20em;
+  background: linear-gradient(to bottom right, #cf5ce2, #ffc947);
+  color: black;
+  font-weight: 900;
   cursor: pointer;
-}
-
-.btn:hover {
-  border-color: orange;
-  background-color: purple;
-  color: white;
 }
 
 .alinear-vertical {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1em;
 }
 
-tr {
-  text-align: center;
+
+table {
+  border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 5px 10px;
+tr:nth-child(odd) {
+  background-color: rgb(255, 255, 255, 0.1);
+}
+
+th {
+  padding: 1em 0;
+}
+
+@media screen and (min-width: 768px) {
+  * {
+    font-size: 18px;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+
+  .nav-links {
+    height: 8vh;
+    width: fit-content;
+    width: -moz-fit-content;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-links li {
+    background-color: transparent;
+    border-bottom: none;
+    height: inherit;
+    line-height: 7vh;
+    width: fit-content;
+    width: -moz-fit-content;
+    min-width: 15vw;
+  }
+
+  .nav-links a {
+    font-size: 1em;
+    color: inherit;
+  }
+
+  .nav-links li:hover,
+  .active {
+    background: linear-gradient(to bottom right, #cf5ce2, #ffc947);
+    color: black;
+  }
+
+  .btn:hover {
+    border: 1px solid #cf5ce2;
+    color: #ffffff
+  }
+
+  main>* {
+    width: 80vw;
+    margin: 0 auto;
+  }
+
+  .perfil a:hover {
+    text-decoration: underline;
+  }
+
+  form,
+  .flash,
+  .error-list,
+  .mis-reservas,
+  .confirmar-reserva>ul {
+    max-width: 40vh;
+  }
+
 }

@@ -2,20 +2,22 @@
   <ul>
     <li>
       <a href="/">
-        <img src="/images/logo-1.png" alt="Home"/>
+        <img class="logo" src="/images/logo-1.png" alt="Home"/>
       </a>
     </li>
-    <li>  
-      <a href="/info">Info</a>
-      <a href="/contacto">Contacto</a>
-    <% if (!usuario){ %>
-        <a href="/usuario/crear"> Crear usuario</a>
-        <a href="/usuario/login">Iniciar Sesión</a>
-      </li>
-    <%} else {%>
-        <a href=<%= "/usuario/" + usuario.id %> ><%= usuario.nombre %></a>
-        <a href="/usuario/logout">Cerrar sesión</a>   
-    <% } %>
-    </li>
+    <div class="nav-links">
+        <li><a href="/info">Info</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+      <% if (!usuario){ %>
+        <li><a href="/usuario/crear"> Crear usuario</a></li>
+        <li><a href="/usuario/login">Iniciar Sesión</a></li>
+      <%} else {%>
+        <li>
+          <a href=<%= "/usuario/" + usuario.id %> ><%= usuario.nombre %></a>
+        </li>
+        <li><a href="/usuario/logout">Cerrar sesión</a></li>
+      <% } %>
+    </div>
+    <li class="menu-icon"><img src="/images/baseline_menu_white_18dp.png"></li>
   </ul>
 </nav>

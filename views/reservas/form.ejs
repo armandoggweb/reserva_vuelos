@@ -1,5 +1,5 @@
 <section class="confirmar-reserva alinear-vertical">
-  <h2>Resumen reserva</h2>
+  <h3>Resumen</h3>
   <ul>
     <li><strong>Origen:</strong></li>
     <ul class="detalle">
@@ -14,7 +14,7 @@
         <li>Hora: <%= vuelo.llegada.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'}) %></li>
     </ul>       
   </ul>
-  <h3><%= typeof reserva != 'undefined' ? '¿Desea modificar su reserva?' : '¿Desea finalizar su reserva? '%> </h3>
+  <p><%= typeof reserva != 'undefined' ? '¿Desea modificar su reserva?' : '¿Desea finalizar su reserva? '%> </p>
   <form method="POST" action=<%= action %> >
     <input type="hidden" name="vuelo" value=<%= vuelo.id %> >
     <input class="btn" type="submit" value="Enviar">

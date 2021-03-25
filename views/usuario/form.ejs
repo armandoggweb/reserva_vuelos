@@ -14,18 +14,18 @@
   <% } %> 
 
   <form method="POST" action=<%= action %> >
-    <label for="nombre">Nombre: </label><br>
+    <label for="nombre">Nombre </label>
     <input type="text" id="nombre" name="nombre" value=<%= usuarioCampos ? usuarioCampos.nombre : "" %>><br>
-    <label for="apellidos">Apellidos: </label><br>
+    <label for="apellidos">Apellidos </label>
     <input type="text" id="apellidos" name="apellidos" value=<%= usuarioCampos ? usuarioCampos.apellidos : "" %>><br>
-    <label for="dni">DNI: </label><br>
+    <label for="dni">DNI </label>
     <input type="text" id="dni" name="dni" value=<%= usuarioCampos ? usuarioCampos.dni : "" %>><br>
-    <label for="email">Email: </label><br>
+    <label for="email">Email </label>
     <input type="email" id="email" name="email" value=<%= usuarioCampos ? usuarioCampos.email : "" %>><br>
-    <label for="edad">Edad: </label><br>
+    <label for="edad">Edad </label>
     <input type="number" id="edad" name="edad" value=<%= usuarioCampos ? usuarioCampos.edad : "" %>><br>
     <% if (!usuario || !usuario.password) {%>
-      <label for="password">Contraseña: </label><br>
+      <label for="password">Contraseña </label>
       <input type="password" id="password" name="password" required minlength="8" maxlength="30" ><br>
     <% } %>
     <input class="btn" type="submit" value="Enviar">

@@ -1,16 +1,16 @@
 <section class="inicio alinear-vertical">
+  <% if(errors){ %>
+    <p class="flash error"><%= errors %></p>
+  <% } %>
   <% if (mensaje_exito.length > 0) { %> 
     <p class="flash exito"><%= mensaje_exito %></p><br>
-  <% } %>
-  <img src="/images/logo-2.png" alt="Logo">
+  <% } %>  
   <% if (usuario) { %>
-    <%- include('./vuelos/busqueda', {layout:false}) %>
-    <% if(errors){ %>
-      <p class="error"><%= errors %></p>
-    <% } %>
+    <%- include('./vuelos/busqueda', {layout:false}) %>    
   <% } else { %>
-    <h3>
+    <img src="/images/logo-2.png" alt="Logo">
+    <p>
       <a href="/usuario/login">Inicia sesión</a> o <a href="/usuario/crear">crea una cuenta</a> para realizar una reserva
-    </h3>
+    </p>
   <% } %> 
 </section>
